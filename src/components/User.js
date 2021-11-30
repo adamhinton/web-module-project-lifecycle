@@ -6,12 +6,17 @@ class User extends React.Component{
         return(
             <section className='user'>
             <img src='https://unsplash.com/photos/XChzBEI6x50'/>
-            <h3>Name: {this.props.userInfo.name}</h3>
-            <p>Handle: {this.props.userInfo.handle}</p>
-            <p>Followers Count: {this.props.userInfo.followerCount}</p>
+            <h3>Name: </h3>
+            <p>Handle: </p>
+            <p>Followers Count: </p>
           </section>
         )
     }
 }
 
 export default User;
+
+
+// {this.props.userInfo.followerCount}
+// {this.props.userInfo.handle}
+// {this.props.userInfo.name}
