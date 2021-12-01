@@ -6,9 +6,9 @@ class User extends React.Component{
         return(
             <section className='user'>
             <img src='https://unsplash.com/photos/XChzBEI6x50'/>
-            <h3>Name: </h3>
-            <p>Handle: </p>
-            <p>Followers Count: </p>
+            <h3>Name: {this.props.userInfo.login}</h3>
+            <p>ID: {this.props.userInfo.id}</p>
+            <p>Followers Count:{this.props.userInfo.followers}</p>
           </section>
         )
     }

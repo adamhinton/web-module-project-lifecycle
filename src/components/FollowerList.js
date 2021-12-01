@@ -8,7 +8,12 @@ class FollowerList extends React.Component{
             <section className='followers'>
             This person's followers are:
             {/* //MAP OVER FOLLOWERS HERE */}
-            <Follower followersArray={this.props.followersArray}></Follower>
+            {this.props.followersArray.map(follower =>{
+                return(
+                    <Follower followersArray={this.props.follower} key = {this.props.follower.id}/>
+                )   
+            })}
+
           </section>
         )
     }
