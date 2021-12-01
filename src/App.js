@@ -13,7 +13,7 @@ class App extends React.Component {
   };
 
   componentDidMount(){
-    axios.get(`https://api.github.com/users/${this.state.currentUser}`)
+    axios.get('https://api.github.com/users/adamhinton')
         .then(resp =>{
             console.log('Here is the initial data:', resp.data)
             this.setState({
@@ -26,50 +26,49 @@ class App extends React.Component {
         })
 }
 
-// componentDidUpdate(prevProps, prevState){
+componentDidUpdate(prevProps, prevState){
 
-//   if(prevState.currentUser !== this.state.currentUser){
-//     console.log('this shouldnt show up');
+  if(prevState.currentUser !== this.state.currentUser){
+    console.log('this shouldnt show up');
+    console.log('UserInfo is now:', this.state.userInfo)
+    axios.get('https://api.github.com/users/adamhinton/followers')
+    .then(resp =>{
+      // console.log(resp)
+        console.log('Here is the follower data:', resp.data)
+        this.setState({
+            followersArray: resp.data,
+           })
+           console.log(followersArray)
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+  }
 
-//     // this.setState({
-//     //   ...this.state,
-//     //   userInfo: {name: 'Adam'}
-//     // })
-
-//     console.log('UserInfo is now:', this.state.userInfo)
-//     axios.get('https://api.github.com/users/adamhinton/followers')
-//     .then(resp =>{
-//       // console.log(resp)
-//         console.log('Here is the follower data:', resp.data)
-//         this.setState({
-//             followersArray: resp.data,
-//            })
-//            console.log(followersArray)
-//     })
-//     .catch(err =>{
-//         console.log(err);
-//     })
-//   }
-
-// }
-
-// handleClick = (e) =>{
-//   getDogImages(this.state.breed)
-//   .then(images => {
-//       this.setState({
-//           ...this.state,
-//           dogImages: images
-//       });
-//   })
-
-// }
-
-handleChange = (e) => {
-  this.setState({
-      ...this.state,
-      currentUser: e.target.value
-  })
 }
+
+handleClick = (e) =>{
+  e.preventDefault();
+  axios.get(`https://api.github.com/users/${this.state.currentUser}`)
+  .then(resp => {
+    console.log(resp.data)
+      this.setState({
+          ...this.state,
+          userInfo: resp.data,
+      })
+  })
+  .catch(err =>{
+    console.error(err)
+  })
+
+}
+
+// handleChange = (e) => {
+//   this.setState({
+//       ...this.state,
+//       currentUser: e.target.value
+//   })
+// }
 
   render() {
     console.log('UserInfo is now:' , this.state.userInfo)
