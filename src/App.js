@@ -13,7 +13,7 @@ class App extends React.Component {
   };
 
   componentDidMount(){
-    axios.get('https://api.github.com/users/adamhinton')
+    axios.get(`https://api.github.com/users/${this.state.currentUser}`)
         .then(resp =>{
             console.log('Here is the initial data:', resp.data)
             this.setState({
@@ -26,18 +26,30 @@ class App extends React.Component {
         })
 }
 
-// componentDidUpdate(prevProps){
-//   axios.get('https://api.github.com/users/adamhinton/followers')
-//   .then(resp =>{
-//       console.log('Here is the follower data:', resp.data)
-//       this.setState({
-//           followersArray: resp.data,
-//          })
-//   })
-//   .catch(err =>{
-//       console.log(err);
-//   })
-// }
+componentDidUpdate(prevProps, prevState){
+  if(prevState.currentUser !== this.state.currentUser){
+    console.log('this shouldnt show up');
+    this.setState({
+      ...this.state,
+      userInfo: {name: 'Adam'}
+    })
+
+    console.log('UserInfo is now:', this.state.userInfo)
+    axios.get('https://api.github.com/users/adamhinton/followers')
+    .then(resp =>{
+      // console.log(resp)
+        console.log('Here is the follower data:', resp.data)
+        this.setState({
+            followersArray: resp.data,
+           })
+           console.log(followersArray)
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+  }
+
+}
 
   render() {
     console.log('UserInfo is now:' , this.state.userInfo)
