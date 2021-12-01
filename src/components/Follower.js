@@ -5,9 +5,9 @@ class Follower extends React.Component{
         // console.log(this.props)
         return(
             <div>
-               <h3>Name: {this.props.followerArray.login}</h3>
-            <p>ID: {this.props.followerArray.id}</p>
-            <p>Followers Count:{this.props.followerArray.followers}</p>   
+               <h3>Name: {this.props.followersArray.login}</h3>
+            <p>ID: {this.props.followersArray.id}</p>
+            <p>Followers Count:{this.props.followersArray.followers}</p>   
             </div>
         )
     }

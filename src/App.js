@@ -24,13 +24,26 @@ class App extends React.Component {
         .catch(err =>{
             console.log(err);
         })
+
+        axios.get('https://api.github.com/users/adamhinton/followers')
+        .then(res=>{
+          this.setState({
+            ...this.state,
+            followersArray: res.data
+          })
+        })
+        .catch(err=>{
+          console.error(err)
+        })
+        console.log('Heres the followers array:'
+        , followersArray)
 }
 
 componentDidUpdate(prevProps, prevState){
 
-  if(prevState.currentUser !== this.state.currentUser){
-    console.log('this shouldnt show up');
-    console.log('UserInfo is now:', this.state.userInfo)
+  if(prevState.userInfo !== this.state.userInfo){
+    console.log('this shouldnt show up')
+    // console.log('UserInfo is now:', this.state.userInfo)
     axios.get(`https://api.github.com/users/${this.state.currentUser}/followers`)
     .then(res=>{
       this.setState({
