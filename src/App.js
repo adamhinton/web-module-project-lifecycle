@@ -26,29 +26,49 @@ class App extends React.Component {
         })
 }
 
-componentDidUpdate(prevProps, prevState){
-  if(prevState.currentUser !== this.state.currentUser){
-    console.log('this shouldnt show up');
-    this.setState({
+// componentDidUpdate(prevProps, prevState){
+
+//   if(prevState.currentUser !== this.state.currentUser){
+//     console.log('this shouldnt show up');
+
+//     // this.setState({
+//     //   ...this.state,
+//     //   userInfo: {name: 'Adam'}
+//     // })
+
+//     console.log('UserInfo is now:', this.state.userInfo)
+//     axios.get('https://api.github.com/users/adamhinton/followers')
+//     .then(resp =>{
+//       // console.log(resp)
+//         console.log('Here is the follower data:', resp.data)
+//         this.setState({
+//             followersArray: resp.data,
+//            })
+//            console.log(followersArray)
+//     })
+//     .catch(err =>{
+//         console.log(err);
+//     })
+//   }
+
+// }
+
+// handleClick = (e) =>{
+//   getDogImages(this.state.breed)
+//   .then(images => {
+//       this.setState({
+//           ...this.state,
+//           dogImages: images
+//       });
+//   })
+
+// }
+
+handleChange = (e) => {
+  this.setState({
       ...this.state,
-      userInfo: {name: 'Adam'}
-    })
-
-    console.log('UserInfo is now:', this.state.userInfo)
-    axios.get('https://api.github.com/users/adamhinton/followers')
-    .then(resp =>{
-      // console.log(resp)
-        console.log('Here is the follower data:', resp.data)
-        this.setState({
-            followersArray: resp.data,
-           })
-           console.log(followersArray)
-    })
-    .catch(err =>{
-        console.log(err);
-    })
-  }
-
+      currentUser: e.target.value
+  })
 }
 
   render() {
@@ -58,8 +78,8 @@ componentDidUpdate(prevProps, prevState){
       <User userInfo={this.state.userInfo}/>
     <FollowerList followersArray={this.state.followersArray}/>
     <form>
-        <input></input>
-        <button>Search Github Handle</button>
+        <input onChange={this.handleChange}></input>
+        <button onClick={this.handleClick}>Search Github Handle</button>
       </form>
 
     </div>);
